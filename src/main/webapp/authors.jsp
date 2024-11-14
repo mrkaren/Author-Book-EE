@@ -19,7 +19,7 @@
 
 <% List<Author> authors = (List<Author>) request.getAttribute("authors"); %>
 
-<table>
+<table border="1">
     <tr>
         <th>id</th>
         <th>name</th>
@@ -27,6 +27,7 @@
         <th>phone</th>
         <th>dob</th>
         <th>gender</th>
+        <th>action</th>
     </tr>
 
 <% for (Author author : authors) { %>
@@ -37,7 +38,7 @@
       <td><%= author.getPhone() %></td>
       <td><%= DateUtil.fromDateToString(author.getDateOfBirthday()) %></td>
       <td><%= author.getGender().name() %></td>
-
+      <td><a href="/deleteAuthor?id=<%= author.getId() %>">Delete</a> / <a href="/editAuthor?id=<%= author.getId() %>">Edit</a> </td>
   </tr>
 <% } %>
 </table>

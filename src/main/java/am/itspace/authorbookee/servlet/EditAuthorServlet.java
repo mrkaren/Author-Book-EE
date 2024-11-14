@@ -13,19 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/addAuthor")
-public class AddAuthorServlet extends HttpServlet {
+@WebServlet("/editAuthor")
+public class EditAuthorServlet extends HttpServlet {
 
     private AuthorService authorService = new AuthorService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addAuthor.jsp").forward(req, resp);
+        int authorId = Integer.parseInt(req.getParameter("id"));
+        Author author = authorService.getAuthorById(authorId);
+        req.setAttribute("author", author);
+        req.getRequestDispatcher("/editAuthor.jsp").forward(req, resp);
     }
 
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         String phone = req.getParameter("phone");
@@ -33,6 +37,7 @@ public class AddAuthorServlet extends HttpServlet {
         String gender = req.getParameter("gender");
 
         Author author = Author.builder()
+                .id(Integer.parseInt(id))
                 .name(name)
                 .surname(surname)
                 .phone(phone)
@@ -40,7 +45,7 @@ public class AddAuthorServlet extends HttpServlet {
                 .gender(Gender.valueOf(gender))
                 .build();
 
-        authorService.add(author);
+        authorService.update(author);
 
         resp.sendRedirect("/authors");
     }

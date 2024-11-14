@@ -15,6 +15,8 @@
 <h1>Books</h1>
 <% List<Book> books = (List<Book>) request.getAttribute("books");%>
 
+<a href="/addBook">Add Book</a>
+
 <table style="border: 1px solid blue">
     <tr>
         <th>id</th>

@@ -92,4 +92,20 @@ public class AuthorService {
         }
     }
 
+    public void update(Author author) {
+        String sql = """
+                UPDATE author SET name = '%s', surname = '%s', phone = '%s',
+                date_of_birthday = '%s', gender = '%s' WHERE id = %d
+                """.formatted(author.getName(), author.getSurname(),
+                author.getPhone(),
+                DateUtil.fromDateToSqlString(author.getDateOfBirthday()),
+                author.getGender().name(), author.getId());
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
