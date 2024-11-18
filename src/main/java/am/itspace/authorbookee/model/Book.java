@@ -19,12 +19,14 @@ public class Book {
     private double price;
     private int qty;
     private Date createdAt;
+    private User user;
 
-    public Book(String title, Author author, double price, int qty, Date createdAt) {
+    public Book(String title, Author author, double price, int qty, Date createdAt, User user) {
         this.title = title;
         this.author = author;
         this.price = price;
         this.qty = qty;
         this.createdAt = createdAt;
+        this.user = user;
     }
 }

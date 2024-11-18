@@ -20,6 +20,6 @@ public class BookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Book> allBooks = bookService.getAllBooks();
         req.setAttribute("books", allBooks);
-        req.getRequestDispatcher("/books.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/books.jsp").forward(req, resp);
     }
 }

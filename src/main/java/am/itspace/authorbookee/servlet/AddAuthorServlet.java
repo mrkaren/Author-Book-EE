@@ -2,6 +2,8 @@ package am.itspace.authorbookee.servlet;
 
 import am.itspace.authorbookee.model.Author;
 import am.itspace.authorbookee.model.Gender;
+import am.itspace.authorbookee.model.User;
+import am.itspace.authorbookee.model.UserType;
 import am.itspace.authorbookee.service.AuthorService;
 import am.itspace.authorbookee.util.DateUtil;
 import lombok.SneakyThrows;

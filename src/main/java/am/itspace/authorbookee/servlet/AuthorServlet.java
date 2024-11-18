@@ -1,6 +1,7 @@
 package am.itspace.authorbookee.servlet;
 
 import am.itspace.authorbookee.model.Author;
+import am.itspace.authorbookee.model.User;
 import am.itspace.authorbookee.service.AuthorService;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,6 @@ public class AuthorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Author> allAuthors = authorService.getAllAuthors();
         req.setAttribute("authors", allAuthors);
-        req.getRequestDispatcher("/authors.jsp").forward(req, resp);
-
+        req.getRequestDispatcher("/WEB-INF/authors.jsp").forward(req, resp);
     }
 }

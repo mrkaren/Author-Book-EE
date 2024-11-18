@@ -2,6 +2,7 @@ package am.itspace.authorbookee.servlet;
 
 import am.itspace.authorbookee.model.Author;
 import am.itspace.authorbookee.model.Book;
+import am.itspace.authorbookee.model.User;
 import am.itspace.authorbookee.service.AuthorService;
 import am.itspace.authorbookee.service.BookService;
 
@@ -24,11 +25,13 @@ public class AddBookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Author> authors = authorService.getAllAuthors();
         req.setAttribute("authors", authors);
-        req.getRequestDispatcher("/addBook.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/addBook.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute("user");
         String title = req.getParameter("title");
         double price = Double.parseDouble(req.getParameter("price"));
         int qty = Integer.parseInt(req.getParameter("qty"));
@@ -40,11 +43,13 @@ public class AddBookServlet extends HttpServlet {
                 .qty(qty)
                 .author(authorService.getAuthorById(authorId))
                 .createdAt(new Date())
+                .user(user)
                 .build();
 
         bookService.add(book);
 
         resp.sendRedirect("/books");
+
     }
 }
 

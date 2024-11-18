@@ -23,7 +23,7 @@ public class EditAuthorServlet extends HttpServlet {
         int authorId = Integer.parseInt(req.getParameter("id"));
         Author author = authorService.getAuthorById(authorId);
         req.setAttribute("author", author);
-        req.getRequestDispatcher("/editAuthor.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/editAuthor.jsp").forward(req, resp);
     }
 
     @SneakyThrows

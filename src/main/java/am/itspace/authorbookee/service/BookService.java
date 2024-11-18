@@ -21,14 +21,16 @@ public class BookService {
 
     public void add(Book book) {
         String sql = """
-                INSERT INTO book(title, price,qty,author_id,created_at)
-                VALUES ('%s', '%f', '%d','%d','%s');
+                INSERT INTO book(title, price,qty,author_id,created_at, user_id)
+                VALUES ('%s', '%f', '%d','%d','%s', '%d');
                 """.formatted(
                 book.getTitle(),
                 book.getPrice(),
                 book.getQty(),
                 book.getAuthor().getId(),
-                DateUtil.fromDateToSqlDateTimeString(book.getCreatedAt()));
+                DateUtil.fromDateToSqlDateTimeString(book.getCreatedAt()),
+                book.getUser().getId()
+        );
 
         try {
             Statement statement = connection.createStatement();
