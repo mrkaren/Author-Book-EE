@@ -16,7 +16,7 @@
 <h1>Add Book</h1>
 <a href="/books">Books Page</a> | <a href="index.jsp">Main</a> <br>
 
-<form action="/addBook" method="post">
+<form action="/addBook" method="post" enctype="multipart/form-data">
     title: <input type="text" name="title"><br>
     price: <input type="number" name="price"><br>
     qty: <input type="number" name="qty"><br>
@@ -26,6 +26,7 @@
     </option>
     <% }%>
 </select><br>
+    <input type="file" name="img">
     <input type="submit" value="ADD">
 
 </form>

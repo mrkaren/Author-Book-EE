@@ -21,15 +21,16 @@ public class BookService {
 
     public void add(Book book) {
         String sql = """
-                INSERT INTO book(title, price,qty,author_id,created_at, user_id)
-                VALUES ('%s', '%f', '%d','%d','%s', '%d');
+                INSERT INTO book(title, price,qty,author_id,created_at, user_id, image_name)
+                VALUES ('%s', '%f', '%d','%d','%s', '%d', '%s');
                 """.formatted(
                 book.getTitle(),
                 book.getPrice(),
                 book.getQty(),
                 book.getAuthor().getId(),
                 DateUtil.fromDateToSqlDateTimeString(book.getCreatedAt()),
-                book.getUser().getId()
+                book.getUser().getId(),
+                book.getImageName()
         );
 
         try {
@@ -59,6 +60,7 @@ public class BookService {
                 book.setQty(resultSet.getInt("qty"));
                 book.setCreatedAt(DateUtil.fromSqlStringToDateTime(resultSet.getString("created_at")));
                 book.setAuthor(authorService.getAuthorById(resultSet.getInt("author_id")));
+                book.setImageName(resultSet.getString("image_name"));
                 result.add(book);
             }
         } catch (SQLException | ParseException e) {
@@ -81,6 +83,8 @@ public class BookService {
                 book.setQty(resultSet.getInt("qty"));
                 book.setCreatedAt(DateUtil.fromSqlStringToDateTime(resultSet.getString("created_at")));
                 book.setAuthor(authorService.getAuthorById(resultSet.getInt("author_id")));
+                book.setImageName(resultSet.getString("image_name"));
+
                 result.add(book);
             }
         } catch (SQLException | ParseException e) {
@@ -102,6 +106,8 @@ public class BookService {
                 book.setQty(resultSet.getInt("qty"));
                 book.setCreatedAt(DateUtil.fromSqlStringToDateTime(resultSet.getString("created_at")));
                 book.setAuthor(authorService.getAuthorById(resultSet.getInt("author_id")));
+                book.setImageName(resultSet.getString("image_name"));
+
                 return book;
             }
         } catch (SQLException | ParseException e) {
@@ -135,6 +141,8 @@ public class BookService {
                 book.setQty(resultSet.getInt("qty"));
                 book.setCreatedAt(DateUtil.fromSqlStringToDateTime(resultSet.getString("created_at")));
                 book.setAuthor(authorService.getAuthorById(resultSet.getInt("author_id")));
+                book.setImageName(resultSet.getString("image_name"));
+
                 result.add(book);
             }
         } catch (SQLException | ParseException e) {
@@ -157,6 +165,7 @@ public class BookService {
                 book.setQty(resultSet.getInt("qty"));
                 book.setCreatedAt(DateUtil.fromSqlStringToDateTime(resultSet.getString("created_at")));
                 book.setAuthor(authorService.getAuthorById(resultSet.getInt("author_id")));
+                book.setImageName(resultSet.getString("image_name"));
                 result.add(book);
             }
         } catch (SQLException | ParseException e) {

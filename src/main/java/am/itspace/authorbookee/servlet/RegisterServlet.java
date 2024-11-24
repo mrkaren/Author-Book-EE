@@ -29,10 +29,41 @@ public class RegisterServlet extends HttpServlet {
         String surname = req.getParameter("surname");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        UserType userType = UserType.valueOf(req.getParameter("user_type"));
+
         HttpSession httpSession = req.getSession();
-        if (userService.getUserByEmail(email) != null) {
-            httpSession.setAttribute("msg", "Email already in use");
+
+        StringBuilder msgBuilder = new StringBuilder();
+        UserType userType = null;
+
+        try {
+            userType = UserType.valueOf(req.getParameter("user_type"));
+        } catch (Exception e) {
+            msgBuilder.append("user type should be USER or ADMIN");
+            msgBuilder.append("<br>");
+        }
+
+        if (name == null || name.trim().isEmpty()) {
+            msgBuilder.append("Name is required");
+            msgBuilder.append("<br>");
+        }
+        if (surname == null || surname.trim().isEmpty()) {
+            msgBuilder.append("Surname is required");
+            msgBuilder.append("<br>");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            msgBuilder.append("Email is required");
+            msgBuilder.append("<br>");
+        }
+        if (password == null || password.trim().isEmpty() || password.length() < 6) {
+            msgBuilder.append("password is required or password's length less then 6");
+            msgBuilder.append("<br>");
+        }
+
+        if (!msgBuilder.isEmpty()) {
+            httpSession.setAttribute("msg", msgBuilder.toString());
+        } else if (userService.getUserByEmail(email) != null) {
+            msgBuilder.append("Email already in use");
+            msgBuilder.append("<br>");
         } else {
             User user = User.builder()
                     .name(name)

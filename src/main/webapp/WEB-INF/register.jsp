@@ -15,7 +15,7 @@
 <span>
     <%
         if (session.getAttribute("msg") != null) { %>
-        <h3><%=request.getAttribute("msg")%></h3>
+        <h3><%=session.getAttribute("msg")%></h3>
    <%
            session.removeAttribute("msg");
        }
@@ -23,7 +23,7 @@
 </span>
 <form action="/register" method="post">
 
-    name: <input type="text" name="name"><br>
+    name: <input type="text" name="name" ><br>
     surname: <input type="text" name="surname"><br>
     email: <input type="text" name="email"><br>
     password: <input type="password" name="password"><br>
